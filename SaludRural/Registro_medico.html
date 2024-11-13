@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro - Medico</title>
+    <link rel="icon" type="image/png" href="Icons/Fondo.png">
+    <style>
+        body {
+            background-color: rgb(173, 216, 230);
+            font-family: cursive;
+            text-align: center; /* Centrar el contenido */
+        }
+        h2 {
+            color: #000000; /* Color de la letra para el título */
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="file"] {
+            font-size: 16px; /* Tamaño del texto del input */
+            padding: 10px; /* Espaciado interno del input */
+            margin: 10px; /* Espaciado externo del input */
+            width: 80%; /* Ancho del input */
+            border: 1px solid #ccc; /* Borde del input */
+            border-radius: 4px; /* Bordes redondeados */
+        }
+        button {
+            font-size: 20px; /* Tamaño del texto del botón */
+            padding: 15px 30px; /* Espaciado interno del botón (padding) */
+            margin: 10px; /* Espaciado externo del botón (margin) */
+            background-color: #4CAF50; /* Color de fondo del botón */
+            color: white; /* Color del texto del botón */
+            border: none; /* Sin borde */
+            border-radius: 5px; /* Bordes redondeados del botón */
+            cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+        }
+        button:hover {
+            background-color: #45a049; /* Color de fondo del botón al pasar el mouse */
+        }
+    </style>
+    <script>
+        function validateAndRegister(event) {
+            // Prevenir el envío del formulario
+            event.preventDefault();
+            
+            // Obtener los valores de los campos
+            var nombre = document.getElementById('nombre').value;
+            var cedula = document.getElementById('cedula').value;
+            var fechaNacimiento = document.getElementById('fechaNacimiento').value;
+            var correo = document.getElementById('correo').value;
+            var telefono = document.getElementById('telefono').value;
+
+            // Validar que los campos no estén vacíos
+            if (nombre === "" || cedula === "" || fechaNacimiento === "" || correo === "" || telefono === "") {
+                alert("Por favor, complete todos los campos.");
+            } else {
+                // Aquí puedes manejar el registro, por ejemplo, enviando los datos a un servidor
+                alert("Registro exitoso!");
+                // Redirigir a otra página o realizar otra acción
+                window.location.href = 'Panel_medico.html'; // descomentar para redirigir
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>Registro - Medico</h2>
+    <form onsubmit="validateAndRegister(event)">
+        <input type="file" accept="image/*" placeholder="Subir Imagen">
+        <input type="text" id="nombre" placeholder="Nombre">
+        <input type="text" id="cedula" placeholder="Cédula">
+        <input type="date" id="fechaNacimiento" placeholder="Fecha de Nacimiento">
+        <input type="email" id="correo" placeholder="Correo">
+        <input type="tel" id="telefono" placeholder="Teléfono">
+        <button type="submit">Registrarse</button>
+    </form>
+</body>
+</html>

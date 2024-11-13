@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agendar Cita</title>
+    <link rel="icon" type="image/png" href="Icons/Fondo.png">
+    <style>
+        body {          
+            background: linear-gradient(to left, #9ad4ec, #008cff, #1209c2); /* Degradado de azul claro a azul más oscuro */
+            font-family: cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            border: 2px solid #000000; /* Borde del contenedor */
+            padding: 20px; /* Espaciado interno del contenedor */
+            background-color: rgb(255, 255, 255); /* Fondo blanco semitransparente */
+            border-radius: 48px; /* Esquinas redondeadas */
+            text-align: center; /* Centra el texto */
+        }
+        h1, h5 {
+            color: #1500ff; /* Color de la letra para los títulos */
+            margin: 8px 0; /* Espaciado entre los títulos */
+        }
+        input, button {
+            font-size: 20px; /* Tamaño del texto del botón y los campos de entrada */
+            padding: 14px 28px; /* Espaciado interno del botón y los campos de entrada (padding) */
+            margin: 2px; /* Espaciado externo del botón y los campos de entrada (margin) */
+            border-radius: 48px; /* Esquinas redondeadas */
+            display: block; /* Hace que los elementos ocupen todo el ancho disponible */
+            width: 100%; /* Ancho total para que se ajusten al contenedor */
+            box-sizing: border-box; /* Incluye el padding y el borde en el tamaño total */
+        }
+    </style>
+</head>
+<body> 
+    <div class="container">
+        <h1><br>Agendar Cita</h1>
+        <h5>A UN CLICK DE DISTANCIA</h5>
+        <br><img src="Icons/Salud.png" alt="Ícono adicional de Paciente">
+        <div>
+            <form action="nueva_ventana.html" target="_blank">
+                <input type="text" placeholder="Nombre">
+                <input type="text" placeholder="Cédula">
+                <input type="date" placeholder="Fecha de Cita">
+                <input type="text" placeholder="Lugar">
+                <input type="text" placeholder="Médico">
+                <button onclick="location.href='Cita_generada.html'" class="icon-button">
+                    Agendar
+            </form>
+        </div>
+    </div>
+</body>
+</html>

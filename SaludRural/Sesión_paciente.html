@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio Sesión Paciente</title>
+    <link rel="icon" type="image/png" href="Icons/Fondo.png"> <!-- Favicon local -->
+    <style>
+        body {
+            background: linear-gradient(180deg, rgba(135, 206, 235, 1) 0%, rgba(70, 130, 180, 1) 100%); /* Fondo degradado azul claro a azul más oscuro */
+            font-family: cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            background: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #000; /* Color del texto del título */
+            text-align: center;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4682B4; /* Color de fondo del botón */
+            color: white; /* Color del texto del botón */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #315f7c; /* Color del botón al pasar el mouse */
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #4682B4; /* Color del enlace */
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration:underline;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <h2>Inicio Sesión Paciente</h2>
+        <center>
+            <img src="Icons/paciente.png" alt="Ícono adicional de Paciente" style="width: 100px; height: 100px;">
+        </center>
+        
+        <input type="text" placeholder="Nombre de Usuario" required>
+        <input type="password" placeholder="Contraseña" required>
+        <button onclick="window.location.href='Panel_paciente.html'">Iniciar sesión</button>
+        <a href="Registro_paciente.html">Registrarse</a>
+        <a href="#">Recuperar Contraseña</a>
+    </form>
+</body>
+</html>

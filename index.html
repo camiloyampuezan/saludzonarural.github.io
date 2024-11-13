@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Salud Rural Un Click de Distancia</title>
+    <link rel="icon" type="image/png" href="saludrural/Icons/Fondo.png">
+    <style>
+        body {          
+            background: linear-gradient(to left, #9ad4ec, #008cff, #1209c2); /* Degradado de azul claro a azul más oscuro */
+            font-family: cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            border: 2px solid #000000; /* Borde del contenedor */
+            padding: 20px; /* Espaciado interno del contenedor */
+            background-color: rgb(255, 255, 255); /* Fondo blanco semitransparente */
+            border-radius: 48px; /* Esquinas redondeadas */
+            text-align: center; /* Centra el texto */
+        }
+        h1, h5 {
+            color: #1500ff; /* Color de la letra para los títulos */
+            margin: 8px 0; /* Espaciado entre los títulos */
+        }
+        button {
+            font-size: 20px; /* Tamaño del texto del botón */
+            padding: 14px 28px; /* Espaciado interno del botón (padding) */
+            margin: 2px; /* Espaciado externo del botón (margin) */
+            border-radius: 48px; /* Esquinas redondeadas */
+        }
+        .icon-button img {
+            width: 22px; /* Ajusta el tamaño del ícono */
+            height: 22px; /* Ajusta el tamaño del ícono */
+            vertical-align: middle; /* Alinea el ícono con el texto */
+            margin-right: 7px; /* Espacio entre el ícono y el texto */
+        }
+    </style>
+</head>
+<body> 
+    <div class="container">
+        <h1><br>SALUD RURAL</h1>
+        <h5>A UN CLICK DE DISTANCIA</h5>
+        <br><img src="saludrural/Icons/Salud.png" alt="Ícono adicional de Paciente">
+        <div>
+            <button onclick="location.href='saludrural/Sesión_paciente.html'" class="icon-button">
+                <img src="saludrural/Icons/paciente.png" alt="Ícono de Paciente"> Paciente
+            </button>
+            <button onclick="location.href='saludrural/Sesión_medico.html'" class="icon-button">
+                <img src="saludrural/Icons/doctor.png" alt="Ícono de Médico"> Médico
+            </button>
+        </div>
+    </div>
+</body>
+</html>
