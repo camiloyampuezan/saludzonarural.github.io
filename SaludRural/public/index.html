@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat en Vivo</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script defer src="chat.js"></script>
+</head>
+<body>
+    <h1>Chat en Vivo</h1>
+    <ul id="messages"></ul>
+    <input id="messageInput" type="text" placeholder="Escribe un mensaje...">
+    <button onclick="sendMessage()">Enviar</button>
+</body>
+</html>
