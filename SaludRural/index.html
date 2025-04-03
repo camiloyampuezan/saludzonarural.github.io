@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salud Rural Un Click de Distancia</title>
+    <link rel="icon" type="image/png" href="Icons/Fondo.png">
+    <style>
+        body {          
+            background: linear-gradient(to left, #9ad4ec, #008cff, #1209c2); /* Degradado de azul claro a oscuro */
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            border: 2px solid #000000;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.85); /* Fondo blanco semitransparente */
+            border-radius: 48px;
+            text-align: center;
+            max-width: 90%;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        h1, h5 {
+            color: #002b80; /* Azul más oscuro para mejor contraste */
+            margin: 8px 0;
+        }
+        h1 {
+            font-size: 28px;
+        }
+        h5 {
+            font-size: 18px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        button {
+            font-size: 18px;
+            padding: 12px 24px;
+            border-radius: 48px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .icon-button img {
+            width: 24px;
+            height: 24px;
+        }
+        img.main-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body> 
+    <main class="container">
+        <h1>SALUD RURAL</h1>
+        <h5>A UN CLICK DE DISTANCIA</h5>
+        <img src="Icons/Salud.png" alt="Ícono representativo de salud" class="main-icon">
+        <div class="button-container">
+            <button onclick="location.href='Sesión_paciente.html'" class="icon-button">
+                <img src="Icons/paciente.png" alt="Ícono de Paciente"> Paciente
+            </button>
+            <button onclick="location.href='Sesión_medico.html'" class="icon-button">
+                <img src="Icons/doctor.png" alt="Ícono de Médico"> Médico
+            </button>
+        </div>
+    </main>
+</body>
+</html>

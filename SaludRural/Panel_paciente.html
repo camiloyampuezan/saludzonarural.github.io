@@ -2,43 +2,104 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Panel Principal - Paciente</title>
+    <title>Panel Principal del Paciente - Salud Rural</title>
     <link rel="icon" type="image/png" href="Icons/Fondo.png">
+    <!-- Incluimos FontAwesome para poder usar los iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Fuente de Google Fonts para mejor legibilidad -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        /* Estilos generales del cuerpo */
         body {          
-            background: linear-gradient(to left, #9ad4ec, #008cff, #1209c2); /* Degradado de azul claro a azul más oscuro */
-            font-family: cursive;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            background: linear-gradient(135deg, #9ad4ec, #008cff, #1209c2); /* Fondo con degradado */
+            font-family: 'Roboto', sans-serif; /* Fuente más legible */
+            display: flex; /* Usa flexbox para centrar el contenido */
+            justify-content: center; /* Centra horizontalmente */
+            align-items: center; /* Centra verticalmente */
+            height: 100vh; /* Usa toda la altura de la pantalla */
+            margin: 0; /* Elimina márgenes predeterminados */
+            position: relative; /* Permite posicionar elementos dentro */
         }
+
+        /* Contenedor principal */
         .container {
-            border: 2px solid #000000; /* Borde del contenedor */
-            padding: 20px; /* Espaciado interno del contenedor */
-            background-color: rgb(255, 255, 255); /* Fondo blanco semitransparente */
-            border-radius: 48px; /* Esquinas redondeadas */
+            border: 2px solid #000000; /* Borde negro */
+            padding: 30px; /* Espaciado interno aumentado */
+            background-color: rgba(255, 255, 255, 0.95); /* Fondo blanco con opacidad ajustada */
+            border-radius: 48px; /* Bordes redondeados */
             text-align: center; /* Centra el texto */
+            max-width: 400px; /* Ancho máximo del contenedor */
+            width: 90%; /* Se ajusta al 90% del ancho disponible */
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para un efecto elevado */
         }
+
+        /* Estilo del título */
         h2 {
-            color: #1500ff; /* Color de la letra para los títulos */
-            margin: 8px 0; /* Espaciado entre los títulos */
+            color: #1500ff; /* Color azul para el título */
+            margin: 12px 0; /* Mayor espaciado entre título y botones */
         }
+
+        /* Estilos generales para los botones */
         button {
-            font-size: 20px; /* Tamaño del texto del botón */
-            padding: 14px 28px; /* Espaciado interno del botón (padding) */
-            margin: 2px; /* Espaciado externo del botón (margin) */
-            border-radius: 48px; /* Esquinas redondeadas */
+            font-size: 18px; /* Tamaño de letra */
+            padding: 14px 28px; /* Espaciado interno aumentado */
+            margin: 10px 0; /* Espaciado mayor entre botones */
+            border-radius: 48px; /* Bordes redondeados */
+            border: none; /* Sin borde */
+            cursor: pointer; /* Cursor tipo "mano" al pasar el mouse */
+            background-color: #008cff; /* Color de fondo azul */
+            color: white; /* Texto en color blanco */
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.3s ease-in-out; /* Efectos de transición */
+        }
+
+        /* Efecto al pasar el mouse sobre los botones */
+        button:hover {
+            background-color: #315f7c; /* Cambia el color al pasar el mouse */
+            transform: scale(1.05); /* Aumenta ligeramente el tamaño */
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3); /* Sombra al pasar el mouse */
+        }
+
+        /* Estilos de la flecha de regreso */
+        .back-arrow {
+            position: absolute; /* Posición absoluta para colocarla en la esquina */
+            top: 20px; /* Distancia desde la parte superior */
+            left: 20px; /* Distancia desde la izquierda */
+            font-size: 28px; /* Tamaño de la flecha */
+            color: #4682B4; /* Color azul */
+            text-decoration: none; /* Sin subrayado */
+            transition: color 0.3s ease-in-out, transform 0.2s ease-in-out; /* Animación suave */
+        }
+
+        /* Efecto al pasar el mouse sobre la flecha */
+        .back-arrow:hover {
+            color: #0000ff; /* Color más oscuro al pasar el mouse */
+            transform: scale(1.1); /* Aumenta un poco su tamaño */
         }
     </style>
 </head>
 <body> 
+    <!-- Flecha de regreso con icono -->
+    <a href="Sesión_paciente.html" class="back-arrow" title="Volver">
+        <i class="fas fa-arrow-left"></i> <!-- Ícono de flecha de FontAwesome -->
+    </a>
+    <!-- Contenedor principal -->
     <div class="container">
         <h2>Panel del Paciente</h2>
-        <button>Estado de Salud</button>
-        <button>Historial Médico</button>
-        <button>Emergencias</button>
+
+        <!-- Botón para agendar citas -->
+        <button onclick="window.location.href='Agendamiento_citas.html'" title="Agendar una cita">
+            Agendar Citas
+        </button>
+
+        <!-- Botón para ver historial médico -->
+        <button onclick="window.location.href='historial_medico.html'" title="Ver historial médico">
+            Historial Médico
+        </button>
+
+        <!-- Botón para acceder al perfil del paciente -->
+        <button onclick="window.location.href='Perfil_paciente.html'" title="Ver perfil">
+            Perfil Paciente
+        </button>
     </div>
 </body>
 </html>

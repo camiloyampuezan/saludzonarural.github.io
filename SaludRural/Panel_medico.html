@@ -6,8 +6,8 @@
     <link rel="icon" type="image/png" href="Icons/Fondo.png">
     <style>
         body {          
-            background: linear-gradient(to left, #9ad4ec, #008cff, #1209c2); /* Degradado de azul claro a azul más oscuro */
-            font-family: cursive;
+            background: linear-gradient(to left, #004d99, #008cff, #002b80);
+            font-family: 'Poppins', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -15,37 +15,68 @@
             margin: 0;
         }
         .container {
-            border: 2px solid #000000; /* Borde del contenedor */
-            padding: 20px; /* Espaciado interno del contenedor */
-            background-color: rgb(255, 255, 255); /* Fondo blanco semitransparente */
-            border-radius: 48px; /* Esquinas redondeadas */
-            text-align: center; /* Centra el texto */
+            background: rgba(255, 255, 255, 0.98);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 400px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
         }
-        h1, h5 {
-            color: #1500ff; /* Color de la letra para los títulos */
-            margin: 8px 0; /* Espaciado entre los títulos */
+        h1 {
+            color: #004d99;
+            font-size: 26px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        h5 {
+            color: #333;
+            font-size: 14px;
+            font-weight: normal;
+            margin-bottom: 20px;
         }
         button {
-            font-size: 20px; /* Tamaño del texto del botón */
-            padding: 14px 28px; /* Espaciado interno del botón (padding) */
-            margin: 2px; /* Espaciado externo del botón (margin) */
-            border-radius: 48px; /* Esquinas redondeadas */
+            width: 100%;
+            padding: 15px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            font-weight: bold;
+            background: linear-gradient(to right, #007bff, #0056b3);
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
         }
-        
+        button:hover {
+            background: linear-gradient(to right, #0056b3, #003f7f);
+            transform: scale(1.03);
+        }
+        .back-arrow {
+            position: absolute;
+            top: 20px;
+            left: 15px;
+            font-size: 24px;
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+        .back-arrow:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
     </style>
 </head>
 <body> 
+    <a href="Sesión_medico.html" class="back-arrow">◀</a>
     <div class="container">
-        <h1><br>Panel del Médico</h1>
-        <h5>A UN CLICK DE DISTANCIA</h5>
-        <div>
-            <button onclick="location.href='Agendamiento_citas.html'" class="icon-button">
-            Programación de Citas
-            </button>
-            <button onclick="location.href='Inquietudes_pacientes.html'" class="icon-button">
-            Inquietudes Pacientes
-            </button>
-        </div>
+        <h1>Panel del Médico</h1>
+        <button onclick="window.location.href='Agendamiento_citas.html'">📅 Programación de Citas</button>
+        <button onclick="window.location.href='Inquietudes_pacientes.html'">💬 Inquietudes Pacientes</button>
+        <button onclick="window.location.href='Lista_pacientes.html'">👨‍⚕️ Pacientes</button>
+        <button onclick="window.location.href='Perfil_medico.html'">⚙️ Perfil</button>
     </div>
 </body>
 </html>

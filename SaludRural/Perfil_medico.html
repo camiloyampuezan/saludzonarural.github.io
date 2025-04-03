@@ -4,47 +4,208 @@
     <meta charset="UTF-8">
     <title>Perfil del Médico</title>
     <link rel="icon" type="image/png" href="Icons/Fondo.png">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
-        body {          
-            background: linear-gradient(to left, #9ad4ec, #008cff, #1209c2); /* Degradado de azul claro a azul más oscuro */
-            font-family: cursive;
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap');
+
+        body {
+            background: linear-gradient(to bottom, #003366, #0066cc);
+            font-family: 'Nunito', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
-        .container {
-            border: 2px solid #000000; /* Borde del contenedor */
-            padding: 20px; /* Espaciado interno del contenedor */
-            background-color: rgb(255, 255, 255); /* Fondo blanco semitransparente */
-            border-radius: 48px; /* Esquinas redondeadas */
-            text-align: center; /* Centra el texto */
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            width: 400px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
         }
-        h1, h5 {
-            color: #1500ff; /* Color de la letra para los títulos */
-            margin: 8px 0; /* Espaciado entre los títulos */
+
+        .card img {
+            width: 90px;
+            border-radius: 50%;
+            margin-bottom: 15px;
         }
-        p {
-            color: #000000; /* Color de la letra para el párrafo */
-            margin: 8px 0; /* Espaciado entre el párrafo */
+
+        h1 {
+            font-size: 22px;
+            color: #003366;
+            margin-bottom: 5px;
         }
+
+        .profile-data {
+            font-size: 16px;
+            color: #555;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
         button {
-            font-size: 20px; /* Tamaño del texto del botón */
-            padding: 14px 28px; /* Espaciado interno del botón (padding) */
-            margin: 2px; /* Espaciado externo del botón (margin) */
-            border-radius: 48px; /* Esquinas redondeadas */
+            background: #0056b3;
+            color: white;
+            font-size: 16px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+            margin: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #003366;
+        }
+
+        .delete-btn {
+            background: #cc0000;
+        }
+
+        .delete-btn:hover {
+            background: #990000;
+        }
+
+        button i {
+            margin-right: 8px;
+        }
+
+        .back-arrow {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 22px;
+            color: #003366;
+            text-decoration: none;
+        }
+
+        .back-arrow:hover {
+            color: #0066cc;
+        }
+
+        .input-field {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
         }
     </style>
+    <script>
+        let isEditing = false;
+
+        function toggleEdit() {
+            if (isEditing) {
+                const nombre = document.getElementById('nombre-input').value.trim();
+                const cedula = document.getElementById('cedula-input').value.trim();
+                const fechaNacimiento = document.getElementById('fechaNacimiento-input').value;
+                const licencia = document.getElementById('licencia-input').value.trim();
+
+                if (!nombre || !cedula || !fechaNacimiento || !licencia) {
+                    alert("Completa todos los campos.");
+                    return;
+                }
+
+                document.getElementById('nombre').innerText = `👨‍⚕️ Nombre: ${nombre}`;
+                document.getElementById('cedula').innerText = `🆔 Cédula: ${cedula}`;
+                document.getElementById('fechaNacimiento').innerText = `📅 Nacimiento: ${fechaNacimiento}`;
+                document.getElementById('licencia').innerText = `📜 Licencia: ${licencia}`;
+
+                localStorage.setItem("medico", JSON.stringify({ nombre, cedula, fechaNacimiento, licencia }));
+
+                document.getElementById('nombre').style.display = 'block';
+                document.getElementById('cedula').style.display = 'block';
+                document.getElementById('fechaNacimiento').style.display = 'block';
+                document.getElementById('licencia').style.display = 'block';
+
+                document.getElementById('nombre-input').remove();
+                document.getElementById('cedula-input').remove();
+                document.getElementById('fechaNacimiento-input').remove();
+                document.getElementById('licencia-input').remove();
+
+                document.getElementById('update-btn').innerHTML = '<i class="fas fa-edit"></i> Editar Datos';
+            } else {
+                editField('nombre', 'text');
+                editField('cedula', 'text');
+                editField('fechaNacimiento', 'date');
+                editField('licencia', 'text');
+
+                document.getElementById('update-btn').innerHTML = '<i class="fas fa-save"></i> Guardar Cambios';
+            }
+            isEditing = !isEditing;
+        }
+
+        function editField(id, type) {
+            const element = document.getElementById(id);
+            const value = element.innerText.split(': ')[1];
+            element.style.display = 'none';
+
+            const input = document.createElement('input');
+            input.id = id + '-input';
+            input.type = type;
+            input.value = value;
+            input.className = 'input-field';
+            element.parentNode.insertBefore(input, element.nextSibling);
+        }
+
+        function eliminarDatos() {
+            if (confirm("¿Seguro que quieres eliminar los datos? Esta acción no se puede deshacer.")) {
+                document.getElementById('nombre').innerText = "👨‍⚕️ Nombre: ";
+                document.getElementById('cedula').innerText = "🆔 Cédula: ";
+                document.getElementById('fechaNacimiento').innerText = "📅 Nacimiento: ";
+                document.getElementById('licencia').innerText = "📜 Licencia: ";
+
+                localStorage.removeItem("medico");
+            }
+        }
+
+        function cargarDatos() {
+            const medico = JSON.parse(localStorage.getItem("medico"));
+            if (medico) {
+                document.getElementById('nombre').innerText = `👨‍⚕️ Nombre: ${medico.nombre}`;
+                document.getElementById('cedula').innerText = `🆔 Cédula: ${medico.cedula}`;
+                document.getElementById('fechaNacimiento').innerText = `📅 Nacimiento: ${medico.fechaNacimiento}`;
+                document.getElementById('licencia').innerText = `📜 Licencia: ${medico.licencia}`;
+            }
+        }
+
+        window.onload = cargarDatos;
+    </script>
 </head>
-<body> 
-    <div class="container">
-        <h1><br>Perfil del Médico</h1>
-        <h5>Datos Personales:</h5>
-        <p>Nombre, Cédula, Fecha de Nacimiento, No. Licencia</p>
-        <br><img src="Icons/Salud.png" alt="Ícono adicional de Paciente">
-        <button onclick="location.href='actualizar_datos.html'">Actualizar Datos</button>
-        <button onclick="location.href='eliminar_datos.html'">Eliminar Datos</button>
+<body>
+    <a href="Panel_medico.html" class="back-arrow"><i class="fas fa-arrow-left"></i></a>
+    <div class="card">
+        <img src="Icons/doctor.png" alt="Foto de perfil">
+        <h1>Perfil del Médico</h1>
+        <div class="profile-data" id="nombre">👨‍⚕️ Nombre: Juan Pérez</div>
+        <div class="profile-data" id="cedula">🆔 Cédula: 1234567890</div>
+        <div class="profile-data" id="fechaNacimiento">📅 Nacimiento: 1980-01-01</div>
+        <div class="profile-data" id="licencia">📜 Licencia: 9876543210</div>
+        <div class="buttons">
+            <button id="update-btn" onclick="toggleEdit()"><i class="fas fa-edit"></i> Editar Datos</button>
+            <button class="delete-btn" onclick="eliminarDatos()"><i class="fas fa-trash"></i> Eliminar Datos</button>
+        </div>
     </div>
 </body>
 </html>
+us

@@ -2,48 +2,116 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Inquietudes de Pacientes</title>
+    <title>Registro - Paciente</title>
     <link rel="icon" type="image/png" href="Icons/Fondo.png">
     <style>
-        body {          
-            background: linear-gradient(to left, #9ad4ec, #008cff, #1209c2); /* Degradado de azul claro a azul más oscuro */
-            font-family: cursive;
+        body {
+            background: linear-gradient(180deg, #d4eaf7, #80bfff);
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            position: relative;
         }
         .container {
-            border: 2px solid #000000; /* Borde del contenedor */
-            padding: 20px; /* Espaciado interno del contenedor */
-            background-color: rgb(255, 255, 255); /* Fondo blanco semitransparente */
-            border-radius: 48px; /* Esquinas redondeadas */
-            text-align: center; /* Centra el texto */
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+            position: relative;
         }
-        h1, h5 {
-            color: #1500ff; /* Color de la letra para los títulos */
-            margin: 8px 0; /* Espaciado entre los títulos */
+        h2 {
+            color: #002b80;
+            margin-bottom: 10px;
         }
-        p {
-            color: #000000; /* Color de la letra para el párrafo */
-            margin: 8px 0; /* Espaciado entre el párrafo */
+        label {
+            display: block;
+            text-align: left;
+            font-weight: bold;
+            margin: 10px 0 5px;
+            color: #333;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
         }
         button {
-            font-size: 20px; /* Tamaño del texto del botón */
-            padding: 14px 28px; /* Espaciado interno del botón (padding) */
-            margin: 2px; /* Espaciado externo del botón (margin) */
-            border-radius: 48px; /* Esquinas redondeadas */
+            width: 100%;
+            padding: 12px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #003f7f;
+        }
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .back-button img {
+            width: 30px;
+            height: 30px;
         }
     </style>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </head>
-<body> 
+<body>
     <div class="container">
-        <h1><br>Inquietudes de Pacientes</h1>
-        <h5>Aquí se muestran las inquietudes de los pacientes</h5>
-        <br><img src="Icons/Salud.png" alt="Ícono adicional de Paciente">
-        <p>Inquietud 1</p>
-        <p>Inquietud 2</p>
+        <!-- Botón de flecha para regresar -->
+        <a href="index.html" class="back-arrow">◀</a>
+
+        <h2>Registro - Paciente</h2>
+        <form onsubmit="validateAndRegister(event)">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" required>
+
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" required>
+
+            <label for="cedula">Cédula</label>
+            <input type="text" id="cedula" required>
+
+            <label for="fechaNacimiento">Fecha de Nacimiento</label>
+            <input type="date" id="fechaNacimiento" required>
+
+            <label for="correo">Correo Electrónico</label>
+            <input type="email" id="correo" required>
+
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" required>
+            
+            <label for="genero">Género</label>
+            <select id="genero" required>
+                <option value="">Seleccione...</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+                <option value="Otro">Otro</option>
+            </select>
+
+            <button type="submit">Registrarse</button>
+        </form>
     </div>
 </body>
 </html>

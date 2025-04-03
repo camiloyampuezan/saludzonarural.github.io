@@ -5,9 +5,9 @@
     <title>Perfil del Paciente</title>
     <link rel="icon" type="image/png" href="Icons/Fondo.png">
     <style>
-        body {          
-            background: linear-gradient(to left, #9ad4ec, #008cff, #1209c2); /* Degradado de azul claro a azul más oscuro */
-            font-family: cursive;
+        body {
+            background: linear-gradient(to left, #9ad4ec, #008cff, #1209c2);
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -15,36 +15,147 @@
             margin: 0;
         }
         .container {
-            border: 2px solid #000000; /* Borde del contenedor */
-            padding: 20px; /* Espaciado interno del contenedor */
-            background-color: rgb(255, 255, 255); /* Fondo blanco semitransparente */
-            border-radius: 48px; /* Esquinas redondeadas */
-            text-align: center; /* Centra el texto */
+            border: 2px solid #000;
+            padding: 20px;
+            background-color: white;
+            border-radius: 16px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
-        h1, h5 {
-            color: #1500ff; /* Color de la letra para los títulos */
-            margin: 8px 0; /* Espaciado entre los títulos */
+        h1 {
+            color: #1500ff;
+            font-size: 1.5em;
         }
-        p {
-            color: #000000; /* Color de la letra para el párrafo */
-            margin: 8px 0; /* Espaciado entre el párrafo */
+        .profile-data {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
         }
         button {
-            font-size: 20px; /* Tamaño del texto del botón */
-            padding: 14px 28px; /* Espaciado interno del botón (padding) */
-            margin: 2px; /* Espaciado externo del botón (margin) */
-            border-radius: 48px; /* Esquinas redondeadas */
+            font-size: 16px;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            background-color: #008cff;
+            color: white;
+            transition: background-color 0.3s ease-in-out, transform 0.2s;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #315f7c;
+            transform: scale(1.05);
+        }
+        .back-arrow {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 28px;
+            color: #4682B4;
+            text-decoration: none;
+        }
+        .back-arrow:hover {
+            text-decoration: underline;
+        }
+        /* Estilos para el logo */
+        .logo {
+            width: 100px;
+            margin-bottom: 10px;
         }
     </style>
+    <script>
+        let isEditing = false;
+
+        function toggleEdit() {
+            if (isEditing) {
+                const nombre = document.getElementById('nombre-input').value.trim();
+                const fechaNacimiento = document.getElementById('fechaNacimiento-input').value.trim();
+
+                if (nombre === "" || fechaNacimiento === "") {
+                    alert("Por favor, completa todos los campos.");
+                    return;
+                }
+
+                document.getElementById('nombre').innerText = `Nombre: ${nombre}`;
+                document.getElementById('fechaNacimiento').innerText = `Fecha de Nacimiento: ${fechaNacimiento}`;
+
+                sessionStorage.setItem('nombre', nombre);
+                sessionStorage.setItem('fechaNacimiento', fechaNacimiento);
+
+                document.getElementById('nombre').style.display = 'block';
+                document.getElementById('fechaNacimiento').style.display = 'block';
+
+                document.getElementById('nombre-input').remove();
+                document.getElementById('fechaNacimiento-input').remove();
+
+                document.getElementById('update-btn').innerText = 'Actualizar Datos';
+                alert("Datos guardados correctamente");
+            } else {
+                const nombre = sessionStorage.getItem('nombre') || "Juan Pérez";
+                const fechaNacimiento = sessionStorage.getItem('fechaNacimiento') || "1980-01-01";
+
+                document.getElementById('nombre').style.display = 'none';
+                document.getElementById('fechaNacimiento').style.display = 'none';
+
+                const nombreInput = document.createElement('input');
+                nombreInput.id = 'nombre-input';
+                nombreInput.type = 'text';
+                nombreInput.value = nombre;
+                nombreInput.className = 'profile-data';
+                document.getElementById('nombre').parentNode.insertBefore(nombreInput, document.getElementById('nombre').nextSibling);
+
+                const fechaNacimientoInput = document.createElement('input');
+                fechaNacimientoInput.id = 'fechaNacimiento-input';
+                fechaNacimientoInput.type = 'date';
+                fechaNacimientoInput.value = fechaNacimiento;
+                fechaNacimientoInput.className = 'profile-data';
+                document.getElementById('fechaNacimiento').parentNode.insertBefore(fechaNacimientoInput, document.getElementById('fechaNacimiento').nextSibling);
+
+                document.getElementById('update-btn').innerText = 'Guardar Cambios';
+            }
+
+            isEditing = !isEditing;
+        }
+
+        function eliminarDatos() {
+            sessionStorage.removeItem('nombre');
+            sessionStorage.removeItem('fechaNacimiento');
+
+            document.getElementById('nombre').innerText = "Nombre: -";
+            document.getElementById('fechaNacimiento').innerText = "Fecha de Nacimiento: -";
+
+            alert("Datos eliminados correctamente");
+        }
+
+        function cargarDatos() {
+            const nombre = sessionStorage.getItem('nombre') || "Juan Pérez";
+            const fechaNacimiento = sessionStorage.getItem('fechaNacimiento') || "1980-01-01";
+
+            document.getElementById('nombre').innerText = `Nombre: ${nombre}`;
+            document.getElementById('fechaNacimiento').innerText = `Fecha de Nacimiento: ${fechaNacimiento}`;
+        }
+
+        window.onload = cargarDatos;
+    </script>
 </head>
-<body> 
+<body>
+    <a href="Panel_paciente.html" class="back-arrow">◀</a>
+
     <div class="container">
-        <h1><br>Perfil del Paciente</h1>
-        <h5>Datos Personales:</h5>
-        <p>Nombre, Cédula, Fecha de Nacimiento</p>
-        <br><img src="Icons/Salud.png" alt="Ícono adicional de Paciente">
-        <button onclick="location.href='actualizar_datos.html'">Actualizar Datos</button>
-        <button onclick="location.href='eliminar_datos.html'">Eliminar Datos</button>
+        <img src="Icons/Fondo.png" alt="Logo de la Aplicación" class="logo">
+        <h1>Perfil del Paciente</h1>
+        <div class="profile-data" id="nombre">Nombre: Juan Pérez</div>
+        <div class="profile-data" id="cedula">Cédula: 1234567890</div>
+        <div class="profile-data" id="fechaNacimiento">Fecha de Nacimiento: 1980-01-01</div>
+
+        <button id="update-btn" onclick="toggleEdit()">Actualizar Datos</button>
+        <button onclick="eliminarDatos()">Eliminar Datos</button>
     </div>
 </body>
 </html>

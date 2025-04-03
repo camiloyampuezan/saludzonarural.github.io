@@ -5,53 +5,122 @@
     <title>Agendar Cita</title>
     <link rel="icon" type="image/png" href="Icons/Fondo.png">
     <style>
+        /* Diseño general */
         body {          
-            background: linear-gradient(to left, #9ad4ec, #008cff, #1209c2); /* Degradado de azul claro a azul más oscuro */
-            font-family: cursive;
+            background: linear-gradient(to left, #9ad4ec, #008cff, #1209c2);
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
+
+        /* Contenedor principal */
         .container {
-            border: 2px solid #000000; /* Borde del contenedor */
-            padding: 20px; /* Espaciado interno del contenedor */
-            background-color: rgb(255, 255, 255); /* Fondo blanco semitransparente */
-            border-radius: 48px; /* Esquinas redondeadas */
-            text-align: center; /* Centra el texto */
+            border: 2px solid #000000;
+            padding: 20px;
+            background-color: white;
+            border-radius: 16px;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
-        h1, h5 {
-            color: #1500ff; /* Color de la letra para los títulos */
-            margin: 8px 0; /* Espaciado entre los títulos */
+
+        /* Logo de la app */
+        .logo {
+            width: 80px;
+            height: auto;
+            margin-bottom: 10px;
         }
+
+        /* Nombre de la app */
+        .app-name {
+            font-size: 22px;
+            font-weight: bold;
+            color: #008cff;
+            margin-bottom: 10px;
+        }
+
+        /* Títulos */
+        h1 {
+            color: #1500ff;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        /* Estilos de los inputs */
         input, button {
-            font-size: 20px; /* Tamaño del texto del botón y los campos de entrada */
-            padding: 14px 28px; /* Espaciado interno del botón y los campos de entrada (padding) */
-            margin: 2px; /* Espaciado externo del botón y los campos de entrada (margin) */
-            border-radius: 48px; /* Esquinas redondeadas */
-            display: block; /* Hace que los elementos ocupen todo el ancho disponible */
-            width: 100%; /* Ancho total para que se ajusten al contenedor */
-            box-sizing: border-box; /* Incluye el padding y el borde en el tamaño total */
+            font-size: 16px;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #008cff;
+            color: white;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #315f7c;
+            transform: scale(1.05);
         }
     </style>
+    <script>
+        function agendarCita(event) {
+            event.preventDefault(); // Evita que la página se recargue
+
+            // Obtener los valores de los campos
+            const nombre = document.getElementById('nombre').value;
+            const cedula = document.getElementById('cedula').value;
+            const fecha = document.getElementById('fecha').value;
+            const hora = document.getElementById('hora').value;
+            const lugar = document.getElementById('lugar').value;
+            const medico = document.getElementById('medico').value;
+
+            // Verificar que todos los campos están llenos
+            if (!nombre || !cedula || !fecha || !hora || !lugar || !medico) {
+                alert("Por favor, complete todos los campos antes de continuar.");
+                return;
+            }
+
+            // Guardar los datos en sessionStorage
+            sessionStorage.setItem('nombre', nombre);
+            sessionStorage.setItem('cedula', cedula);
+            sessionStorage.setItem('fecha', fecha);
+            sessionStorage.setItem('hora', hora);
+            sessionStorage.setItem('lugar', lugar);
+            sessionStorage.setItem('medico', medico);
+
+            // Redirigir a la página de confirmación
+            window.location.href = 'Cita_generada.html';
+        }
+    </script>
 </head>
-<body> 
+<body>
     <div class="container">
-        <h1><br>Agendar Cita</h1>
-        <h5>A UN CLICK DE DISTANCIA</h5>
-        <br><img src="Icons/Salud.png" alt="Ícono adicional de Paciente">
-        <div>
-            <form action="nueva_ventana.html" target="_blank">
-                <input type="text" placeholder="Nombre">
-                <input type="text" placeholder="Cédula">
-                <input type="date" placeholder="Fecha de Cita">
-                <input type="text" placeholder="Lugar">
-                <input type="text" placeholder="Médico">
-                <button onclick="location.href='Cita_generada.html'" class="icon-button">
-                    Agendar
-            </form>
-        </div>
+        <!-- Logo y nombre de la aplicación -->
+        <img src="Icons/Salud.png" alt="Logo de la App" class="logo">
+        <div class="app-name">A UN CLICK DE DISTANCIA</div>
+
+        <h1>Agendar Cita</h1>
+        <form onsubmit="agendarCita(event)">
+            <input type="text" id="nombre" placeholder="Nombre Completo" required>
+            <input type="text" id="cedula" placeholder="Cédula" required>
+            <input type="date" id="fecha" required>
+            <input type="time" id="hora" required> <!-- Campo para seleccionar la hora -->
+            <input type="text" id="lugar" placeholder="Lugar de Atención" required>
+            <input type="text" id="medico" placeholder="Nombre del Médico" required>
+            <button type="submit">Agendar Cita</button>
+        </form>
     </div>
 </body>
 </html>

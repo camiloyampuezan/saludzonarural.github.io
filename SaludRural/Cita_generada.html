@@ -5,40 +5,138 @@
     <title>Confirmación de Cita</title>
     <link rel="icon" type="image/png" href="Icons/Fondo.png">
     <style>
+        /* Diseño general */
         body {          
-            background: linear-gradient(to left, #9ad4ec, #008cff, #1209c2); /* Degradado de azul claro a azul más oscuro */
-            font-family: cursive;
+            background: linear-gradient(to left, #9ad4ec, #008cff, #1209c2);
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
+
+        /* Contenedor principal */
         .container {
-            border: 2px solid #000000; /* Borde del contenedor */
-            padding: 20px; /* Espaciado interno del contenedor */
-            background-color: rgb(255, 255, 255); /* Fondo blanco semitransparente */
-            border-radius: 48px; /* Esquinas redondeadas */
-            text-align: center; /* Centra el texto */
+            border: 2px solid #000000;
+            padding: 20px;
+            background-color: white;
+            border-radius: 16px;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
-        h1, h5 {
-            color: #1500ff; /* Color de la letra para los títulos */
-            margin: 8px 0; /* Espaciado entre los títulos */
+
+        /* Títulos */
+        h1 {
+            color: #1500ff;
+            font-size: 1.5em;
+            margin-bottom: 10px;
         }
+
+        /* Información de la cita */
+        .cita-info {
+            text-align: left;
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .cita-info p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        /* Botón de volver */
         button {
-            font-size: 20px; /* Tamaño del texto del botón */
-            padding: 14px 28px; /* Espaciado interno del botón (padding) */
-            margin: 2px; /* Espaciado externo del botón (margin) */
-            border-radius: 48px; /* Esquinas redondeadas */
+            font-size: 16px;
+            padding: 12px 20px;
+            margin-top: 15px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            background-color: #008cff;
+            color: white;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #315f7c;
+            transform: scale(1.05);
+        }
+
+        /* Flecha de volver */
+        .back-arrow {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 28px;
+            color: #4682B4;
+            text-decoration: none;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .back-arrow:hover {
+            transform: scale(1.1);
         }
     </style>
+    <script>
+        // Función para volver al panel según el usuario
+        function volverAlPanel() {
+            const userType = sessionStorage.getItem('userType');
+            if (userType === 'paciente') {
+                window.location.href = 'Panel_paciente.html';
+            } else if (userType === 'medico') {
+                window.location.href = 'Panel_medico.html';
+            } else {
+                window.history.back();
+            }
+        }
+
+        // Función para cargar la información de la cita desde sessionStorage
+        function cargarDatosCita() {
+            const nombre = sessionStorage.getItem('nombre') || 'No disponible';
+            const cedula = sessionStorage.getItem('cedula') || 'No disponible';
+            const fecha = sessionStorage.getItem('fecha') || 'No disponible';
+            const hora = sessionStorage.getItem('hora') || 'No disponible';
+            const lugar = sessionStorage.getItem('lugar') || 'No disponible';
+            const medico = sessionStorage.getItem('medico') || 'No disponible';
+
+            document.getElementById('nombre').textContent = nombre;
+            document.getElementById('cedula').textContent = cedula;
+            document.getElementById('fecha').textContent = fecha;
+            document.getElementById('hora').textContent = hora;
+            document.getElementById('lugar').textContent = lugar;
+            document.getElementById('medico').textContent = medico;
+        }
+
+        // Ejecutar la función al cargar la página
+        window.onload = cargarDatosCita;
+    </script>
 </head>
-<body> 
+<body>
+    <!-- Flecha de regreso -->
+    <a href="javascript:volverAlPanel()" class="back-arrow">◀</a> 
+
+    <!-- Contenedor principal -->
     <div class="container">
-        <h1><br>Confirmación de Cita</h1>
-        <h1>Su cita se generó correctamente</h1>
-        <br><img src="Icons/Salud.png" alt="Ícono adicional de Paciente">
-        <button onclick="location.href='panel_paciente.html'">Volver al Panel</button>
+        <h1>¡Cita Generada con Éxito!</h1>
+        <p>Su cita ha sido registrada correctamente.</p>
+
+        <!-- Información de la cita -->
+        <div class="cita-info">
+            <p><strong>Nombre:</strong> <span id="nombre"></span></p>
+            <p><strong>Cédula:</strong> <span id="cedula"></span></p>
+            <p><strong>Fecha:</strong> <span id="fecha"></span></p>
+            <p><strong>Hora:</strong> <span id="hora"></span></p> <!-- Nueva línea para mostrar la hora -->
+            <p><strong>Lugar:</strong> <span id="lugar"></span></p>
+            <p><strong>Médico:</strong> <span id="medico"></span></p>
+        </div>
+
+        <button onclick="volverAlPanel()">Volver al Panel</button>
     </div>
 </body>
 </html>

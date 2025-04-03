@@ -9,6 +9,7 @@
             background-color: rgb(173, 216, 230);
             font-family: cursive;
             text-align: center; /* Centrar el contenido */
+            position: relative;
         }
         h2 {
             color: #000000; /* Color de la letra para el título */
@@ -38,6 +39,17 @@
         button:hover {
             background-color: #45a049; /* Color de fondo del botón al pasar el mouse */
         }
+        .back-arrow {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 36px; /* Tamaño más grande de la flecha */
+            color: #4682B4;
+            text-decoration: none;
+        }
+        .back-arrow:hover {
+            text-decoration: underline;
+        }
     </style>
     <script>
         function validateAndRegister(event) {
@@ -64,6 +76,7 @@
     </script>
 </head>
 <body>
+    <a href="Sesión_medico.html" class="back-arrow">◀</a> <!-- Flecha para volver hacia atrás -->
     <h2>Registro - Medico</h2>
     <form onsubmit="validateAndRegister(event)">
         <input type="file" accept="image/*" placeholder="Subir Imagen">

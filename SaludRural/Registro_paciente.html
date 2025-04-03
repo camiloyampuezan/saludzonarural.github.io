@@ -5,74 +5,168 @@
     <title>Registro - Paciente</title>
     <link rel="icon" type="image/png" href="Icons/Fondo.png">
     <style>
+        
         body {
-            background-color: rgb(173, 216, 230);
-            font-family: cursive;
-            text-align: center; /* Centrar el contenido */
+            background: linear-gradient(180deg, #d4eaf7, #80bfff);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
         }
         h2 {
-            color: #000000; /* Color de la letra para el título */
+            color: #002b80;
+            margin-bottom: 10px;
         }
-        input[type="text"],
-        input[type="date"],
-        input[type="email"],
-        input[type="tel"],
-        input[type="file"] {
-            font-size: 16px; /* Tamaño del texto del input */
-            padding: 10px; /* Espaciado interno del input */
-            margin: 10px; /* Espaciado externo del input */
-            width: 80%; /* Ancho del input */
-            border: 1px solid #ccc; /* Borde del input */
-            border-radius: 4px; /* Bordes redondeados */
+        label {
+            display: block;
+            text-align: left;
+            font-weight: bold;
+            margin: 10px 0 5px;
+            color: #333;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
         }
         button {
-            font-size: 20px; /* Tamaño del texto del botón */
-            padding: 15px 30px; /* Espaciado interno del botón (padding) */
-            margin: 10px; /* Espaciado externo del botón (margin) */
-            background-color: #4CAF50; /* Color de fondo del botón */
-            color: white; /* Color del texto del botón */
-            border: none; /* Sin borde */
-            border-radius: 5px; /* Bordes redondeados del botón */
-            cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+            width: 100%;
+            padding: 12px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
         }
         button:hover {
-            background-color: #45a049; /* Color de fondo del botón al pasar el mouse */
+            background-color: #003f7f;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            animation: fadeIn 0.3s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal button {
+            margin-top: 10px;
+            background: #0056b3;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
     <script>
-        function validateAndRegister(event) {
-            // Prevenir el envío del formulario
-            event.preventDefault();
-            
-            // Obtener los valores de los campos
-            var nombre = document.getElementById('nombre').value;
-            var cedula = document.getElementById('cedula').value;
-            var fechaNacimiento = document.getElementById('fechaNacimiento').value;
-            var correo = document.getElementById('correo').value;
-            var telefono = document.getElementById('telefono').value;
-
-            // Validar que los campos no estén vacíos
-            if (nombre === "" || cedula === "" || fechaNacimiento === "" || correo === "" || telefono === "") {
-                alert("Por favor, complete todos los campos.");
-            } else {
-                // Aquí puedes manejar el registro, por ejemplo, enviando los datos a un servidor
-                alert("Registro exitoso!");
-                // Redirigir a otra página o realizar otra acción
-                window.location.href = 'Panel_paciente.html'; // descomentar para redirigir
+        function generateRandomString(length) {
+            let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            let result = "";
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
             }
+            return result;
+        }
+
+        function validateAndRegister(event) {
+            event.preventDefault();
+            var nombre = document.getElementById('nombre').value.trim();
+            var apellido = document.getElementById('apellido').value.trim();
+            var cedula = document.getElementById('cedula').value.trim();
+            var fechaNacimiento = document.getElementById('fechaNacimiento').value;
+            var correo = document.getElementById('correo').value.trim();
+            var telefono = document.getElementById('telefono').value.trim();
+            var genero = document.getElementById('genero').value;
+            
+            var usuario = nombre.toLowerCase() + '.' + apellido.toLowerCase();
+            var contraseña = apellido.substring(0, 3).toLowerCase() + cedula.slice(-4) + generateRandomString(3);
+            
+            navigator.clipboard.writeText(`Usuario: ${usuario}\nContraseña: ${contraseña}`)
+                .then(() => {
+                    document.getElementById('modal-text').innerText = `Usuario: ${usuario}\nContraseña: ${contraseña}\nDatos copiados en portapapeles.`;
+                    document.getElementById('modal').style.display = 'flex';
+                });
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            window.location.href = 'sesión_paciente.html';
         }
     </script>
 </head>
 <body>
-    <h2>Registro - Paciente</h2>
-    <form onsubmit="validateAndRegister(event)">
-        <input type="file" accept="image/*" placeholder="Subir Imagen">
-        <input type="text" id="nombre" placeholder="Nombre">
-        <input type="text" id="cedula" placeholder="Cédula">
-        <input type="date" id="fechaNacimiento" placeholder="Fecha de Nacimiento">
-        <input type="email" id="correo" placeholder="Correo">
-        <input type="tel" id="telefono" placeholder="Teléfono">
-        <button type="submit">Registrarse</button>
-    </form>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <p id="modal-text"></p>
+            <button onclick="closeModal()">Aceptar</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Registro - Paciente</h2>
+        <form onsubmit="validateAndRegister(event)">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" required>
+
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" required>
+
+            <label for="cedula">Cédula</label>
+            <input type="text" id="cedula" required>
+
+            <label for="fechaNacimiento">Fecha de Nacimiento</label>
+            <input type="date" id="fechaNacimiento" required>
+
+            <label for="correo">Correo Electrónico</label>
+            <input type="email" id="correo" required>
+
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" required>
+            
+            <label for="genero">Género</label>
+            <select id="genero" required>
+                <option value="">Seleccione...</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+                <option value="Otro">Otro</option>
+            </select>
+
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
 </body>
 </html>

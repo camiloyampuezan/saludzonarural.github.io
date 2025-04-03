@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Recuperar Contraseña</title>
+    <link rel="icon" type="image/png" href="Icons/Fondo.png">
+    <style>
+        body {
+            background: linear-gradient(to left, #9ad4ec, #008cff, #1209c2);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 400px;
+        }
+        h1 {
+            color: #1500ff;
+        }
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin: 5px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            background-color: #008cff;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #005bb5;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Recuperar Contraseña</h1>
+        
+        <!-- Paso 1: Ingresar Correo -->
+        <div id="step1">
+            <input type="email" id="email" placeholder="Ingrese su correo" required>
+            <button onclick="enviarCodigo()">Enviar Código</button>
+        </div>
+
+        <!-- Paso 2: Ingresar Código -->
+        <div id="step2" class="hidden">
+            <input type="text" id="codigo" placeholder="Ingrese el código recibido" required>
+            <button onclick="verificarCodigo()">Verificar Código</button>
+        </div>
+
+        <!-- Paso 3: Nueva Contraseña -->
+        <div id="step3" class="hidden">
+            <input type="password" id="newPassword" placeholder="Nueva contraseña" required>
+            <button onclick="actualizarContraseña()">Actualizar Contraseña</button>
+        </div>
+
+        <p id="mensaje"></p>
+    </div>
+
+    <script>
+        let codigoGenerado = "";
+
+        function enviarCodigo() {
+            const email = document.getElementById('email').value;
+            if (email === "") {
+                alert("Por favor, ingrese un correo válido.");
+                return;
+            }
+            codigoGenerado = Math.floor(100000 + Math.random() * 900000).toString(); // Código de 6 dígitos
+            alert(`Código enviado: ${codigoGenerado}`); // Simulación (en un backend real, se enviaría por correo)
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.remove('hidden');
+        }
+
+        function verificarCodigo() {
+            const codigoIngresado = document.getElementById('codigo').value;
+            if (codigoIngresado === codigoGenerado) {
+                document.getElementById('step2').classList.add('hidden');
+                document.getElementById('step3').classList.remove('hidden');
+            } else {
+                alert("Código incorrecto, intente nuevamente.");
+            }
+        }
+
+        function actualizarContraseña() {
+            const nuevaContraseña = document.getElementById('newPassword').value;
+            if (nuevaContraseña.length < 6) {
+                alert("La contraseña debe tener al menos 6 caracteres.");
+                return;
+            }
+            alert("Contraseña actualizada correctamente.");
+            window.location.href = "Sesión_paciente.html"; // Redirigir a la página de inicio de sesión
+        }
+    </script>
+
+</body>
+</html>
