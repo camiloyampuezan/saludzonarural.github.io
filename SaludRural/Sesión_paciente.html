@@ -84,31 +84,20 @@
             text-decoration: none;
         }
     </style>
-    <script>
-        function validarFormulario(event) {
-            event.preventDefault();
-            let usuario = document.getElementById("usuario").value;
-            let contraseña = document.getElementById("contraseña").value;
-            if (usuario === "" || contraseña === "") {
-                alert("Por favor, complete todos los campos.");
-                return;
-            }
-            window.location.href = 'Panel_paciente.html';
-        }
-    </script>
 </head>
 <body>
     <a href="../index.html" class="back-arrow">◀</a>
-    <form onsubmit="validarFormulario(event)">
-        <h2>Inicio Sesión Paciente</h2>
+    <form action="controllers/iniciar_sesion.php" method="POST">
+    <h2>Inicio Sesión Paciente</h2>
         <img src="Icons/paciente.png" alt="Ícono adicional de Paciente" style="width: 100px; height: 100px;">
         
         <label for="usuario">Nombre de Usuario</label>
-        <input type="text" id="usuario" placeholder="Ingrese su usuario" required>
+        <input type="text" id="usuario" name="usuario" placeholder="Ingrese su usuario" required>
+
         
         <label for="contraseña">Contraseña</label>
-        <input type="password" id="contraseña" placeholder="Ingrese su contraseña" required>
-        
+        <input type="password" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña" required>
+           
         <button type="submit">Iniciar sesión</button>
         <a href="Registro_paciente.html">Registrarse</a>
         <a href="Recuperar_contraseña.html">Recuperar Contraseña</a>
